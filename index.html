@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cerita Kita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf1f1;--ink:#2b1740;--soft:#6e5a80;--rose:#d6456b;--lilac:#ebdcf2;--paper:#fffdfb;--line:#e6cfd8}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:12px}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.7 Nunito,system-ui,sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15}
+section{padding:56px 0 8px}
+h2{font-size:1.9rem;margin-bottom:6px}
+.sub{color:var(--soft);margin-bottom:24px}
+
+/* Hero */
+.hero{padding:calc(64px + env(safe-area-inset-top,0px)) 0 40px;text-align:center}
+.hero h1{font-size:clamp(3rem,16vw,5.2rem);font-weight:700;letter-spacing:-.02em}
+.hero h1 i{color:var(--rose);font-weight:500}
+.hero p{color:var(--soft);margin-top:12px}
+.days{display:inline-block;margin-top:28px;padding:14px 26px;border-radius:999px;background:var(--ink);color:#fff}
+.days b{font:700 1.6rem Fraunces,serif;color:#ffc2d1;margin-right:6px}
+
+/* Timeline */
+.tl{border-left:2px solid var(--line);margin-left:8px;padding-left:22px}
+.item{position:relative;padding-bottom:40px}
+.item::before{content:"";position:absolute;left:-30px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--rose);border:3px solid var(--bg)}
+.item h3{font-size:1.4rem}
+.item p{margin:6px 0 14px;white-space:pre-line}
+.awal{background:var(--lilac);border-radius:18px;padding:22px}
+.awal h3{margin-bottom:8px}.awal p{white-space:pre-line}
+
+/* Polaroid */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pol{background:var(--paper);padding:8px 8px 10px;border-radius:4px;box-shadow:0 2px 10px #2b17401f;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.pol:nth-child(odd){transform:rotate(-1.4deg)}.pol:nth-child(even){transform:rotate(1.2deg)}
+.pol img,.ph{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:var(--lilac)}
+.ph{display:grid;place-items:center;text-align:center;font-size:.8rem;color:var(--soft);padding:8px}
+.pol span{display:block;font-size:.82rem;line-height:1.35;margin-top:8px;color:var(--soft)}
+
+/* Chips */
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;margin-bottom:6px}
+.chip{flex:none;border:1.5px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:6px 16px;font:600 .9rem Nunito,sans-serif;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--rose);border-color:var(--rose);color:#fff}
+
+/* Sayang */
+.sayang{background:var(--ink);color:#fff;border-radius:22px;padding:30px 24px}
+.sayang h2{color:#ffc2d1}
+.sayang li{list-style:none;padding:12px 0;border-top:1px solid #ffffff26;font-family:Fraunces,serif;font-size:1.15rem;line-height:1.45}
+.sayang li:first-child{border-top:0}
+
+/* Tulis */
+form{display:grid;gap:10px;margin-bottom:22px}
+input,textarea{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink)}
+textarea{min-height:120px;resize:vertical}
+.btn{background:var(--rose);color:#fff;border:0;border-radius:12px;padding:13px;font:600 1rem Nunito,sans-serif;cursor:pointer}
+.note{background:var(--paper);border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid var(--line)}
+.note small{color:var(--soft)}.note p{white-space:pre-line;margin:4px 0 8px}
+.note button{background:none;border:0;color:var(--rose);font:600 .85rem Nunito,sans-serif;cursor:pointer;padding:4px 0}
+.hint{font-size:.85rem;color:var(--soft)}
+
+/* Nav */
+nav{position:fixed;left:0;right:0;bottom:0;background:#fffdfbf2;backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+nav a{color:var(--soft);text-decoration:none;font:600 .8rem Nunito,sans-serif;padding:6px 10px;border-radius:10px;text-align:center;min-width:64px}
+nav a:active,nav a:focus-visible{background:var(--lilac);color:var(--ink);outline:none}
+
+dialog{border:0;border-radius:14px;padding:10px;max-width:min(92vw,520px);background:var(--paper)}
+dialog::backdrop{background:#2b1740cc}
+dialog img{width:100%;max-height:70vh;object-fit:contain;display:block;border-radius:6px}
+dialog p{padding:10px 4px 4px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="hero wrap" id="beranda">
+  <h1 id="judul"></h1>
+  <p id="tagline"></p>
+  <div class="days"><b id="hari">0</b>hari aku kenal kamu</div>
+</header>
+
+<main class="wrap">
+  <section id="cerita">
+    <h2>Cerita Kita</h2>
+    <p class="sub">Dari awal sampai sekarang.</p>
+    <div class="awal" id="awal"></div>
+    <div class="tl" id="timeline" style="margin-top:32px"></div>
+  </section>
+
+  <section id="sayang"><div class="sayang"><h2 id="sayangJudul"></h2><ul id="sayangList"></ul></div></section>
+
+  <section id="foto">
+    <h2>Foto</h2>
+    <p class="sub">Ketuk foto untuk memperbesar.</p>
+    <div class="chips" id="chips"></div>
+    <div class="grid" id="galeri"></div>
+  </section>
+
+  <section id="tulis">
+    <h2>Tulis Cerita</h2>
+    <p class="sub">Tambah kenangan baru kapan saja.</p>
+    <form id="form">
+      <input id="fJudul" placeholder="Judul kenangan" required maxlength="80">
+      <textarea id="fIsi" placeholder="Ceritanya..." required></textarea>
+      <button class="btn" type="submit">Simpan cerita</button>
+    </form>
+    <div id="catatan"></div>
+    <p class="hint">Catatan tersimpan di HP ini saja, tidak ikut terlihat di HP lain.</p>
+  </section>
+</main>
+
+<nav aria-label="Menu">
+  <a href="#beranda">Beranda</a><a href="#cerita">Cerita</a><a href="#foto">Foto</a><a href="#tulis">Tulis</a>
+</nav>
+
+<dialog id="dlg"><img id="dImg" alt=""><p id="dKet"></p><button class="btn" style="width:100%;margin-top:6px" onclick="dlg.close()">Tutup</button></dialog>
+
+<script>
+/* ============ ISI CERITA: EDIT BAGIAN INI SAJA ============ */
+const DATA = {
+  judul: ["Aku", "Kamu"],               // contoh: ["Rizky", "Putri"]
+  tagline: "Cerita kecil kami, dari dulu sampai sekarang.",
+  mulai: "2016-07-17",                  // tanggal mulai dihitung (YYYY-MM-DD)
+  awal: {
+    judul: "Awal aku jatuh cinta",
+    teks: "Waktu baru masuk SMP, aku mulai jatuh cinta sama kamu, waktu itu kmu disuruh perkenalan dan kmu perkenalan,nama kmu AGHNIA BALQIS INDINA AZZAHRA, terus kmu bilang nama panggilan mu balqis, terus guru bilang kenapa gak aghnia aja , terus habis itu kmu mau pindah ke munjungan aku sedih waktu itu kmu sudah pamit pamit ,terus waktu itu kamu gak jadi aku senang bangett,tapi sayang nya anak anak ejek kmu munjungan munjungan waktu itu,dan setiap berangkat ke sekolah aku selalu melihat kmu juga mau berangkat kamu sering berhenti di depan pondok darunajah, waktu itu aku juga pernah ngikutin kmu sama anak anak karna aku pingin tau rumah kmu , pas ujian kls 1 kmu duduknya sama anak sumeringin lupa aku namanya soalnya sd nya sd 3 sebelah sd ku sering main jugaa, dan masuk kls 8 aku kaget banget waktu itu pas kmu bilang suka sama aku jadinya aku cinta gak sendirian, dan habis itu aku mulai cari tau tentang kmu di fb ig dll, pertama aku cari kmu di fb aku cari nama kmu gak ketemu ketemu ,terus aku coba cari anak anak terus ketemu nama ELINAANGGELINA ternyata itu akun fb kmu aku ikutin dan aku baca aku lihat sampai bawah postingan ulang mu dan chatt mu, terus pas ujian kls 8 aku cari cari kmu ternyata kmu beda kelas, teerus kita ada lomba kebersihan kelas kita ngechatt kls dll,kls kita juara 3. tapi kmu gak ada waktu itu , terus masuk bulan januari kayak anak anak setuju kita bareng bareng kayak pas itu anak anak nemuin kita ,tapi kita masih malu malu jadi kita lngsung pergi gak ngomong apa apa, pas kelompokan nari juga kita digituain sam anak anak, dan pas klompokan nari di rumah silpa aku nanya anak anak kos kos an mu ternyata di situ depan terminal, dan kita waktu itu chhat cahtt an nya pakai hp silpa kmu kmu kirim aku lagu banyu langit, itu lagu jadi lagu kesukaan ku sampai sekarang ,dulu pas 2021-2025 aku setiap malam dengerin lagu itu, dan pas ulang tahun 2018 kita saling ngucapin pertama kali pakai wa sendiri sendiri, masuk kls 9 anak anak selalu godain kita kayak nama baku lah dll, terus waktu itu aku kan ke adura pas pulang aku kesekolah bawa jajan anak anak pada rebutan aku gak tau kalau kmu ada disitu aktu itu ,dan kmu minta ke aku aktu itu aku senang jadi kita bisa chatt an ,itu awal kita dekat dan cahtt an,di kelas juga kita sering main bola dibelakang, dan ada kejadian aku gak sengaja nendang kaki kamu jadi aku bingung mau gimana waktu itu, terus kita sama aank anak main di grand prak,beli es di bintang dan pulangnya aku bonceng sampai ke dalam sekolahan, terus pas uang ku jatuh kmu ambil , aku minta sampai depan kos mu kamu gak kasih tapi sore nya kmu sama ank anak ke rumahku ngasih itu terus aku ajak kmu ke pasko,(tempat aku ngopi ) pas kita klompokan di rumah maklis kmu dibonceng riko pakai sepedah ku, dan pas kemana kalau ada aku kmu selalu pakai sepedah ku, aku bahagia banget waktu ituuu, sampai kita lulus smp, kita masihh chatt an , pas sma juga kita chatt an aku sering lihat kmu jalan jalan acara sekolahmu lewat depan man,dan ternyata kmu sekelas sama dulurku yang rumahnya mana itu lupa belokan itu loo, sekarang rumah itu dijual dia gak disitu lagi dan pas bulan desember itu kmu cerita ke aku kalau kmu mau berhenti sekolah dan mau kerja kmu kejakarta kerja , sampai bulan juli kita vc telponan setiap malam,terus kita asing lagi karna aku cemburu waktu itu , terus kita gak ada kabar sama sekali, tapi aku selalu lihat kmu dari tiktok ig dll, sampai bulan januari 2022 kmu minta nomorku aku senang banget tapi kmu sudah ada cowo aku sedih banget, february kmu wa aku annyain ada bener jatuh gak dari sumberingin sampai jarakan,terus kmu ngajak bukber ,aku gak mau karna aku gak bisa lihat kmu sama orang lain, terus pas aku dimalang kmu wa aku suruh post setory amal masjid itu , pas bulan juli anak pas aku lihat foli pada godain siapa yang suruh bikin story karna aku gak pernah bikin stoory , dia bilang poasti cewenya , aku senyum aja , aku sedih pas bulan juli kmu lamaran itu. terus pas agustus maklis ngasih undangan samaa nanda ke rumah pas aku lagi foli jadi aku langsung puang waktu itu, dan semenjak itu aku gak pernah keluar rumah sama sekali, karna pas main sama anak anak anak anak pada nanyaain kmu itu yang mana, trrus pas kmu nikah aku gak datang karna aku gak bisa lihat kmu sama orang lain selama 2022 sampai 2025 aku gak pernah keluar rumah kalau gak perlu, 2023 kmu ajak aku ngopi ituuu, aku mikir kmu sama itu jadi aku gak mau waktu ituu, kmu ngajak bukber juga, dan 2025 kmu ngajak bukber , terus kmu minta tolong masalah ig itu habis itu kita like likan tiktok smapai sampai anak anak kasih inpo ke aku tentang kmu, aku senang waktu itu ,dan oktober kita bisa vc sampai saat ini, udah banyak yang kita lewatin dari oktober 2025-2026 november ini dari kita berantem kita happy dll, aku senang banget lo kita awal ketemu january tgl 16 itu aku happy banget kita ke gacoan kita main kita jalan jalan,tgl 17 kita ke cengkeh, tgl 18 kmu kasih aku es bubur sama roti,tgl 19 senin kita belanja di pasar sore,kmu beli ayam panggang ,terus kmu kasih ke aku ternyata sorenya,terus kita joging di gor,pulangnya kita ke indomaret dan muter lewat ngadirenggo, selasa kita joging juga pulang e makan bakso, rabu nya kmu antar aku pepanjang stnk tapi gak bisa kita pulang terus beli mie ayam, kamis nya kmu berobat terus pualng e kita ke pantai kita foto foto aku bahagia banget ,pulang ekita beli soto, terus antar nasi di pangku ,jumat e kita perpanjang stnk itu kmu antar aku ,pulangh e kita beli nasi pecel ituu, sabtunya kmu ke psikolog habis dari sana kita beli bakso, senin e kita kmu antar aku bayar uang kuliah terus ke bendungan aku bahagia banget, kamis nya kita ngantar nasi ke gandusari karna ada pengajian waktu itu ,malam e kita ambil juga karna gak habis, minggu nya kita antar nasi ke durenan itu pagi pagi terus pulang kmu belikan aku coklat ,kita mampir k e base camp ambil sesuatu, senin nya kita beli seblakk, skamis nya kita itu terus kita salah paham sampai jumat kmu mau ke ln itu sabtubya kmu kasih aku nasi megengan dan buah buahan ,senin e kita ke pasar basah tapi gak ada ayam e kita beli di jarakan terus muter lagi, habis itu kita beli kopi,selasanya aku antar kmu ke dokter resa sakit terus kita digodain waktu itu,habis dari sana kita ke base camp terus beli ayam bakar, habis itu kmu belikan aku kesing hp, kamis tgl 12 kamu ajak aku beli bakso , terus kita beli siang siang kita kehujanan di jalan kita neduh , setelah beli kita ke indomaret buluagung,terus kita lwat kota kmu belikan aku baju sama sandal aiger, senin kita ke jaaz, selasa nya kita jalan jalan seblum puasa kita cari seblak gak ada kita muter muter ,kita dapnya nasi sambal bakar waktu itu, rabu nya lebaran, kamis aku antar kmu ngantar nasi terus kita beli sate karna nunggu yang di pertigaan gak buka buka,jumat sabtu sama aku natar kmu natar nasi juga siang ke kuwot dan malam ke angkringan, minggu aku antar kmu makan seblak sebelum kmu kemadura aku puasa waktu itu, terus kita ldr lagi, kita ketemu tgl 13 kita ke jaaz , sabtu minggu kmu gak antar nasi senin nya aku temenin kmu benerin gigi kmu terus kita makan sate, selasa kmu antar aku ke karangan terus ke angkringan habis itu kita ke indomaret kmu cerita cerita masalah mbh mu minta motor dan hp itu, rabu kita beli gegok sore sore terus kita makan di grand prak,kamis kita beli seblak kita buka disana waktu itu terus pulang e kmu kasih adik adik ku uang itu, jumat nya kita mokel sate soreny aku antar kmu antar zakat ke gandusari, sabtu kita beli nasgor itu malam malam terus ada kecelakaan di stadion, minggu kmu kerumah terus kita jalan jalan beli bakso kita muter muter sampai donglurah waktu itu pulang e kmu mampir kerumah nemuin mbk ku, terus kita ke terminal habis itu kmu beli pasir kucing terus pulang, senin e kita beli bakso ,aku gak tau kmu dibilangin sama mas putra waktu itu, selasa nya kmu sama anak anak badan kerumah mu itu rabunya aku antar kmu ngantar tenda dan kita beli bakso kmu cerita masalah mas putra dan kmu pingin ke ln waktu itu, kamis nya kita ke gacoann terus kmu beli roti bakar dan kita ambil blimbing wuluh,jumat kmu mabil tenda terus kita mau beli ayam eh sampai jarakan lampumu jatuh, sabtunya mbh mu munjuan ke situ ,malamnya kita beli martabak, minggu kita ke jaaz habis dari sana kmu gak enak badan senin nya kmu antar aku beli roko,terus kita makan mie ayam, terus aku ke madura kita ldr, mei kita ketuan lagi, dalam 8 hari kita jalan terus dari kejaaz pokok kesana kemri bareng terus bahagia banget , aku kesini lagi terus pulang kita kejaaz kita beli mie ayam kita lihat takbiran kita bakar bakar kamis joging jumat sabtu kepantai sampa malam waktu itu bahagia banget kita foto foto main main happy banget sayanggg minggu  kmu nemnin aku ngerjain tugas senin e kmu jual hp kita bekli ayam dimakan dirumahku kmu ngasih baju banyak, terus ngantar nasi ke angkringa  kmu persiapan karnafal terus kmu antar aku ke madura kita ldr smapai agustus banyak yang kita lewatin waktu itu , agustus kita kete,mu terus seminggu sebelum aku pulang kesini kmu setiap pagi main kerumah kita main uno aku senang bangett walaukita gak bisa jalan, yterus sempember sampai sekarang kita ldr ,karna bulan bualn itu banyak banget rintangan kita jadinya kita sering berantem dan salah paham aku mintaa maaf yaa sayang aku sayangg sama kmuu dan masih banyak lagi."
+  },
+  bulan: [
+    { nama: "Januari", teks: "Tulis cerita bulan Januari di sini.",
+      foto: [{ file: "januari1.jpeg", ket: "awal kita ketemu 16 january" }, { file: "januari2.jpeg", ket: "waktu di cengkeh" }, { file: "januari3.jpeg", ket: "waktu di pantai cengkrong" }, { file: "januari4.jpeg", ket: "pantai cengkrong" }, { file: "januari5.jpeg", ket: "kita ke gandusari" }, { file: "januari6.jpeg", ket: "habis joging kmu beli baju" }] },
+    { nama: "Februari", teks: "Tulis cerita bulan Februari di sini.",
+      foto: [{ file: "februari1.jpeg", ket: "jaaz" }, { file: "februari2.jpeg", ket: "makan ayam bakar pas kmu sakit" }, { file: "februari3.jpeg", ket: "makan sambal bakar" }, { file: "februari4.jpeg", ket: "makan seblak pas minggu awal puasa(aku puasa)" }, { file: "februari5.jpeg", ket: "makan seblak lagi pas puasa" }, { file: "februari6.jpeg", ket: "kita joging di st pertama kali" }, { file: "februari7.jpeg", ket: "main bulu tangkis" }] },
+    { nama: "Maret", teks: "Tulis cerita bulan Maret di sini.",
+      foto: [{ file: "maret1.jpeg", ket: "selasa kmu cerita masalah mbh mu minta motor" }, { file: "maret2.jpeg", ket: "makan seblak hari kamis sebelum lebaran" }, { file: "maret3.jpeg", ket: "ke gacoan terakhir kali" }, { file: "maret4.jpeg", ket: "lebaran" }, { file: "maret5.jpeg", ket: "hari minggu leberan di indomaret sumberingin" }] },
+    { nama: "April", teks: "Tulis cerita bulan April di sini.",
+      foto: [{ file: "april.jpeg", ket: "kmu daftar pt(medical)" }] },
+    { nama: "Mei", teks: "Tulis cerita bulan Mei di sini.",
+      foto: [{ file: "mei.JPG", ket: "di beli kopii" }, { file: "mei2.JPG", ket: "hari minggu sesudah kita makan soto dog" }, { file: "mei3.JPG", ket: "makan nasgor" }, { file: "mei4.JPG", ket: "di indomaret sumberingin hari senin" }, { file: "mei5.JPG", ket: "ke gacoan" }, { file: "mei6.JPG", ket: "indomaret kota kita cari teh pucuk" }, { file: "mei7.JPG", ket: "kmu antar aku pulangg habis beli geprekin makan di alun laun" }, { file: "mei8.JPG", ket: "di indomaret sumberingim" }, { file: "mei9.JPG", ket: "indomaret sumberingim" }, { file: "mei10.JPG", ket: "grand park" }, { file: "mei11.jpeg", ket: "pantai gemah" }, { file: "mei12.jpeg", ket: "di indomaret sumberingin" }, { file: "mei13.jpeg", ket: "jaaz" }, { file: "mei14.jpeg", ket: "joging terakhirhari kamis " }, { file: "mei15.jpeg", ket: "pantai" }] },
+    { nama: "Juni", teks: "Tulis cerita bulan Juni di sini.",
+      foto: [{ file: "juni.jpeg", ket: "sebelum antar aku pulang" }] }
+  ],
+  sayangJudul: "Kenapa aku sayang kamu",
+  sayang: [
+    "aku sayang sama kmu itu gak tau karna apa tapi aku sayang sama kmu tulus banget, karna kmu itu beda dari orang lain sayanggg",
+  
+  ]
+};
+/* =========================================================== */
+
+const $ = id => document.getElementById(id);
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+// Beranda
+$("judul").append(DATA.judul[0] + " & ", Object.assign(el("i"), { textContent: DATA.judul[1] }));
+$("tagline").textContent = DATA.tagline;
+$("hari").textContent = Math.max(0, Math.floor((Date.now() - new Date(DATA.mulai)) / 864e5)).toLocaleString("id-ID");
+
+// Awal
+$("awal").append(el("h3", "", DATA.awal.judul), el("p", "", DATA.awal.teks));
+
+// Polaroid
+function polaroid(f) {
+  const b = el("button", "pol"); b.type = "button";
+  const img = new Image(); img.src = f.file; img.alt = f.ket; img.loading = "lazy";
+  img.onerror = () => { const p = el("div", "ph", "Foto belum ditambahkan"); img.replaceWith(p); b.dataset.empty = "1"; };
+  b.append(img, el("span", "", f.ket));
+  b.onclick = () => { if (b.dataset.empty) return; $("dImg").src = f.file; $("dImg").alt = f.ket; $("dKet").textContent = f.ket; $("dlg").showModal(); };
+  return b;
+}
+
+// Timeline
+DATA.bulan.forEach(m => {
+  const it = el("div", "item"), g = el("div", "grid");
+  m.foto.forEach(f => g.append(polaroid(f)));
+  it.append(el("h3", "", m.nama + " 2026"), el("p", "", m.teks), g);
+  $("timeline").append(it);
+});
+
+// Sayang
+$("sayangJudul").textContent = DATA.sayangJudul;
+DATA.sayang.forEach(s => $("sayangList").append(el("li", "", s)));
+
+// Galeri + filter
+let aktif = "Semua";
+function renderGaleri() {
+  $("galeri").replaceChildren();
+  DATA.bulan.filter(m => aktif === "Semua" || m.nama === aktif)
+    .forEach(m => m.foto.forEach(f => $("galeri").append(polaroid(f))));
+}
+["Semua", ...DATA.bulan.map(m => m.nama)].forEach(n => {
+  const c = el("button", "chip", n); c.type = "button"; c.setAttribute("aria-pressed", n === aktif);
+  c.onclick = () => { aktif = n; document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === c)); renderGaleri(); };
+  $("chips").append(c);
+});
+renderGaleri();
+
+// Catatan baru (disimpan di browser)
+const KEY = "cerita-baru";
+const muat = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+const simpan = a => { try { localStorage.setItem(KEY, JSON.stringify(a)); } catch {} };
+function renderCatatan() {
+  const box = $("catatan"); box.replaceChildren();
+  muat().forEach((c, i) => {
+    const n = el("div", "note");
+    const hapus = el("button", "", "Hapus"); hapus.type = "button";
+    hapus.onclick = () => { const a = muat(); a.splice(i, 1); simpan(a); renderCatatan(); };
+    n.append(el("h3", "", c.judul), el("small", "", c.tgl), el("p", "", c.isi), hapus);
+    box.append(n);
+  });
+}
+$("form").onsubmit = e => {
+  e.preventDefault();
+  const a = muat();
+  a.unshift({ judul: $("fJudul").value.trim(), isi: $("fIsi").value.trim(), tgl: new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) });
+  simpan(a); e.target.reset(); renderCatatan();
+};
+renderCatatan();
+</script>
+</body>
+</html>
